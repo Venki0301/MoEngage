@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>DigitalIdentification</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+<body id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="#page-top">
+            <img th:src="@{/assets/img/nav.png}" style="width:100px;height:100px" alt="RESPONSE_CODES" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars ms-1"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                <li class="nav-item"><a class="nav-link" th:href="@{/dogs/home}"><span th:text="${username}"></span></a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/dogs/search}">Search</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/dogs/list}">Lists</a></li>
+
+                <li class="nav-item" th:if="${username!=null}"><a class="nav-link" th:href="@{/dogs/logout}">logout</a></li>
+                <li class="nav-item" th:if="${username==null}"><a class="nav-link" th:href="@{/dogs/LoginPage} ">Login</a></li>
+                <li class="nav-item" th:if="${username==null}"><a class="nav-link" th:href="@{/dogs/signup}">SignUp</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container">
+
+        <h3>Savd List</h3>
+        <hr>
+        <!--    add employee button-->
+        <a th:href="@{/dogs/search}"
+           class="btn btn-primary btn-sm mb-3">Add List</a>
+        <table class="table table-bordered table-striped">
+
+            <thead class="table-dark">
+            <tr>
+                <th>ListName</th>
+
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="list: ${ListSaves}">
+
+                <td><a th:href="@{'/dogs/listView/' + ${list.id}}" th:text="${list.name}"></a>
+                </td>
+
+                <td>
+                    <!--                add a delete button-->
+                    <a th:href="@{/dogs/delete(ListId=${list.id})}"
+                       onclick="if(!(confirm('Are you sure you want to delete this employee?'))) return false"
+                       class="btn btn-danger btn-sm ">Delete</a>
+                </td>
+
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</header>
+</div>
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+</html>
